@@ -1,0 +1,47 @@
+.card{
+    border-radius: 20px;
+    padding: 16px;
+    flex-grow: 1;
+    max-width: 500px;
+    min-width: 300px;
+    color: white;
+
+    .card-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        border-radius: 10px;
+        
+       .row{
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px
+        }   
+        h2{
+            text-transform: capitalize;
+        }
+        .edit-button,.delete-button{
+            cursor: pointer;
+        }
+        .title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            font-size: 20px;
+
+        }
+    }
+  
+    &.investment{
+        background-color: rgb(61, 0, 175);
+    }
+    &.saving{
+        background-color: rgb(0, 194, 48);
+    }
+    &.expense{
+        background-color: rgb(194, 45, 0);
+    }
+}

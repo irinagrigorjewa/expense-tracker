@@ -1,0 +1,35 @@
+.transaction-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50em;
+    margin: 20px;
+    
+    .row{
+        display: flex;
+        gap: 8px;
+        width: 100%;
+    }
+    
+    input, select, option{
+        width: 100%;
+        height: 35px;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 8px;
+        font-size: 18px;
+        color:rgb(116, 112, 108)
+    }
+}
+.transaction-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2{
+        font-size: 30px;
+        color:rgb(168, 88, 221);
+    }
+}

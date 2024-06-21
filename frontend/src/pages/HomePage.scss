@@ -1,0 +1,29 @@
+.chart{
+    width: 400px;
+    height: 400px;
+}
+.home-page{
+    text-align: center;
+
+    .title{
+        font-size: 34px;
+    }
+    .subtitle{
+        font-weight: bold;
+        margin-bottom: 32px;
+        background: linear-gradient(to top left, rgba(9,9,121,1) 0%, rgb(236, 52, 206) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;    
+    }
+    .profile-picture{
+        width: 100px;
+    }
+    .logout-button{
+        border: none;
+        font-size: 16px;
+        background-color: rgb(143, 139, 139);
+        border-radius: 5px;
+        padding: 8px;
+        color: white;
+    }
+}
