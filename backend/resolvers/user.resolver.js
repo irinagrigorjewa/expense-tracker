@@ -1,11 +1,9 @@
 import { users } from '../dummyData/data.js'
 import User from '../models/user.model.js'
+import bcrypt from "bcryptjs";
 
 const userResolver = {
     Query: {
-        // users: (parent, args, { req, res }, info) => {
-        //     return users
-        // },
         user: (_, { userId }) => {
             try {
                 const user = users.findById(userId)
@@ -25,7 +23,7 @@ const userResolver = {
                 throw new Error(error)
 
             }
-        }
+        },
     },
     Mutation: {
         signUp: async (_, { input }, context) => {
@@ -62,7 +60,7 @@ const userResolver = {
             try {
                 const { username, password } = input
                 const { user } = await context.authenticate("graphql-local", { username, password })
-                context.login(user)
+                await context.login(user)
                 return user
 
             } catch (error) {
@@ -72,17 +70,27 @@ const userResolver = {
         logout: async (_, __, context) => {
             try {
                 await context.logout()
-                req.session.destroy((err) => {
+                context.req.session.destroy((err) => {
                     if (err) { throw new Error(err) }
 
                 })
-                res.clearCookie("connect.sid")
+                context.res.clearCookie("connect.sid")
                 return { message: "Logged out successfully" }
 
             } catch (error) {
                 throw new Error(error)
             }
         }
-    }
+    },
+    // User: {
+    //     transactions: async (parent) => {
+    //         try {
+    //             const transactions = await Transaction.find({ userId: parent._id })
+    //             return transactions
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    // }
 }
 export default userResolver;

@@ -1,6 +1,7 @@
 import passport from "passport"
 import User from "../models/user.model.js"
 import { GraphQLLocalStrategy } from "graphql-passport"
+import bcrypt from "bcryptjs";
 
 export const configurePassport = async () => {
     passport.serializeUser((user, done) => {
@@ -22,10 +23,11 @@ export const configurePassport = async () => {
                 if (!user) {
                     throw new Error("Invalid username or password")
                 }
-                const validPassport = await bcrypt.compare(password, user.passport)
+                const validPassport = await bcrypt.compare(password, user.password)
                 if (!validPassport) {
                     throw new Error("Invalid password")
                 }
+                return done(null, user)
             } catch (error) {
                 done(error)
             }

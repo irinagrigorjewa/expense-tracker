@@ -6,6 +6,7 @@ type User {
     password: String!
     profilePicture: String
     gender: String!
+    # transaction: [Transaction!]
 }
 type Query {
     authUser: User
