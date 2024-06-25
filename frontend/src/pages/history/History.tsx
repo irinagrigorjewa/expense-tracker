@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_TRANSACTIONS } from "../../graphql/queries/transaction.query";
 import { Card } from "../../components/Card/Card";
 import { Transaction } from "../../types/Transaction";
-import { GET_USER_AND_TRANSACTIONS } from "../../graphql/queries/user.query";
+// import { GET_USER_AND_TRANSACTIONS } from "../../graphql/queries/user.query";
 import "./History.scss";
 
 export const History = () => {

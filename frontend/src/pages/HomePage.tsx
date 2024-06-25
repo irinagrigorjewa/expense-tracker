@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { TransactionForm } from "./transaction/TransactionForm";
@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { History } from "./history/History";
 import "./HomePage.scss";
 import {
-  GET_ALL_TRANSACTIONS,
+  // GET_ALL_TRANSACTIONS,
   GET_TRANSACTION_STATISTICS,
 } from "../graphql/queries/transaction.query";
 import { Category } from "../types/Category";
@@ -49,7 +49,6 @@ export const HomePage = () => {
     investment: "rgba(255, 99, 132)",
   };
   useEffect(() => {
-    console.log(data?.categoryStatistics);
     if (data?.categoryStatistics) {
       const categories = data.categoryStatistics?.map(
         (stat: Category) => stat.category
@@ -90,14 +89,16 @@ export const HomePage = () => {
   };
   return (
     <div className="home-page">
-      <p className="subtitle">Spend wisely, track wisely</p>
-      <img
-        className="profile-picture"
-        src={authUserData.authUser.profilePicture}
-      />
-      <button className="logout-button" onClick={handleLogout}>
-        Logout
-      </button>
+      <div className="subtitle-wrapper">
+        <h2 className="subtitle">Spend wisely, track wisely</h2>
+        <img
+          className="profile-picture"
+          src={authUserData.authUser.profilePicture}
+        />
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
       <div className="chart">
         <Doughnut data={chartData} />
       </div>

@@ -31,7 +31,6 @@ const transactionResolvers = {
             if (!context.getUser()) throw new Error('Unauthorized')
             const userId = context.getUser()._id
             const transactions = await Transaction.find({ userId })
-            console.log(transactions)
 
             const categoryMap = {}
             transactions.forEach(transaction => {
@@ -40,7 +39,6 @@ const transactionResolvers = {
                 }
                 categoryMap[transaction.category] += transaction.amount
             })
-            console.log(categoryMap)
             // return [{ category: 'categoryMap', totalAmount: 'amountMap' }]
             return Object.entries(categoryMap).map(([category, totalAmount]) => ({ category, totalAmount }))
         }
@@ -48,8 +46,6 @@ const transactionResolvers = {
     Mutation: {
         createTransaction: async (_, { input }, context) => {
             try {
-                console.log(context)
-
                 const newTransaction = new Transaction({
                     ...input,
                     userId: context.getUser()._id

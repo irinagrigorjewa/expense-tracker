@@ -12,6 +12,7 @@ import mergedTypeDefs from "./typeDefs/index.js";
 import connectDB from './db/connectDB.js';
 import session from 'express-session';
 import passport from 'passport';
+import path from 'path'
 
 import connectMongo from 'connect-mongodb-session';
 import { buildContext } from 'graphql-passport';
@@ -20,6 +21,7 @@ import { configurePassport } from './passport/passport.config.js';
 dotenv.config()
 configurePassport()
 
+const __dirname = path.resolve()
 const app = express();
 const httpServer = http.createServer(app)
 
@@ -63,7 +65,7 @@ const server = new ApolloServer({
 await server.start()
 
 app.use(
-  '/',
+  '/graphql',
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -75,6 +77,13 @@ app.use(
     context: async ({ req, res }) => (buildContext({ req, res })),
   }),
 );
+app.use(express.static(path.join(__dirname, 'frontend/dist')))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'),)
+}
+
+)
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));

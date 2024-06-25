@@ -1,5 +1,5 @@
 import { Form, Field } from "react-final-form";
-import { Input } from "../../components/Input/Input";
+// import { Input } from "../../components/Input/Input";
 import { Button } from "../../components/Button/Button";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../graphql/mutation/user.mutation";
@@ -11,9 +11,7 @@ export const SignUpPage = () => {
   const [signup, { loading }] = useMutation(SIGN_UP, {
     refetchQueries: ["GetAuthenticatedUser"],
   });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (values: any) => {
-    console.log(values);
     try {
       await signup({
         variables: {
@@ -28,34 +26,26 @@ export const SignUpPage = () => {
 
   const required = (value: string | undefined): string | undefined =>
     value ? undefined : "Required";
- 
+
   return (
     <div className="sign-up-page">
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <Form
         onSubmit={onSubmit}
-        // validate={validate}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className="sign-up-form">
-            <Input
-              label={"Name"}
-              name={"name"}
-              placeholder={"Name"}
-              type={"text"}
-              validate={required}
-            />
-            <Input
-              label={"Username"}
-              name={"username"}
-              placeholder={"Username"}
-              type={"text"}
-            />
-            <Input
-              label={"Password"}
-              name={"password"}
-              placeholder={"Password"}
-              type={"text"}
-            />
+            <Field name="name" validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <input {...input} type="text" placeholder="Name" />
+                  <div className="error">
+                    {meta.touched && meta.error && <span>{meta.error}</span>}
+                  </div>
+                </div>
+              )}
+            </Field>
+            <input name={"username"} placeholder={"Username"} type={"text"} />
+            <input name={"password"} placeholder={"Password"} type={"text"} />
 
             <label>Gender</label>
             <Field name="gender">
@@ -68,7 +58,6 @@ export const SignUpPage = () => {
                       value={"male"}
                       placeholder="Male"
                     />
-                    {/* {meta.touched && meta.error && <span>{meta.error}</span>} */}
                     Male
                   </label>
                 </div>
@@ -84,14 +73,18 @@ export const SignUpPage = () => {
                       type="radio"
                       placeholder="Female"
                     />
-                    {/* {meta.touched && meta.error && <span>{meta.error}</span>} */}
                     Female
                   </label>
                 </div>
               )}
             </Field>
             <Button disabled={loading} type="submit" label="Submit" />
-            <Link to="/login">Login</Link>
+            <span>
+              {"Already have an account? "}
+              <Link className="login-link" to="/login">
+                Login
+              </Link>
+            </span>
           </form>
         )}
       />

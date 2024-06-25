@@ -13,7 +13,7 @@ interface Props {
   transaction: Transaction | null;
 }
 export const TransactionForm = ({ type, transaction }: Props) => {
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues:
       {
         description: transaction?.description,
@@ -24,7 +24,7 @@ export const TransactionForm = ({ type, transaction }: Props) => {
         date: transaction?.date,
       } || {},
   });
-  console.log(transaction);
+
   const [createTransaction] = useMutation(CREATE_TRANSACTION, {
     refetchQueries: ["GetAllTransactions", "GetTransactionStatistics"],
   });

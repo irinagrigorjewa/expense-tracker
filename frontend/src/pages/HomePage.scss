@@ -1,24 +1,35 @@
-.chart{
+.chart {
     width: 400px;
     height: 400px;
 }
-.home-page{
+
+.home-page {
     text-align: center;
 
-    .title{
+    .title {
         font-size: 34px;
     }
-    .subtitle{
+
+    .subtitle-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px
+    }
+
+    .subtitle {
         font-weight: bold;
         margin-bottom: 32px;
-        background: linear-gradient(to top left, rgba(9,9,121,1) 0%, rgb(236, 52, 206) 100%);
+        background: linear-gradient(to top left, rgba(9, 9, 121, 1) 0%, rgb(236, 52, 206) 100%);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;    
+        -webkit-text-fill-color: transparent;
     }
-    .profile-picture{
-        width: 100px;
+
+    .profile-picture {
+        width: 70px;
     }
-    .logout-button{
+
+    .logout-button {
         border: none;
         font-size: 16px;
         background-color: rgb(143, 139, 139);
