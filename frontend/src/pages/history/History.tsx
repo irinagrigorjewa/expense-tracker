@@ -13,7 +13,7 @@ export const History = () => {
   return (
     <div className="history">
       {data?.transactions.map((transaction: Transaction) => (
-        <Card transaction={transaction} />
+        <Card key={transaction._id} transaction={transaction} />
       ))}
     </div>
   );

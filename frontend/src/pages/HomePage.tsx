@@ -83,6 +83,7 @@ export const HomePage = () => {
     try {
       await logout();
       client.clearStore();
+      window.location.reload();
     } catch (error) {
       toast.error("Could not log out");
     }
@@ -93,7 +94,7 @@ export const HomePage = () => {
         <h2 className="subtitle">Spend wisely, track wisely</h2>
         <img
           className="profile-picture"
-          src={authUserData.authUser.profilePicture}
+          src={authUserData?.authUser?.profilePicture}
         />
         <button className="logout-button" onClick={handleLogout}>
           Logout

@@ -14,7 +14,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 16px
+        gap: 16px;
+
+        @media screen and (max-width: 620px) {
+            flex-direction: column;
+        }
     }
 
     .subtitle {
@@ -36,5 +40,6 @@
         border-radius: 5px;
         padding: 8px;
         color: white;
+        cursor: pointer;
     }
 }

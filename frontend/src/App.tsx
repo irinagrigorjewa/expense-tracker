@@ -1,5 +1,13 @@
 import "./App.scss";
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 import { SignUpPage } from "./pages/signUp/SignUpPage";
 import { LoginPage } from "./pages/login/LoginPage";
 import { TransactionPage } from "./pages/transaction/TransactionPage";
@@ -10,12 +18,12 @@ import { GET_AUTH_USER } from "./graphql/queries/user.query";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { data } = useQuery(GET_AUTH_USER);
+  const { data, loading } = useQuery(GET_AUTH_USER);
 
-  return (
-    <div className="app">
-      {data?.authUser && <Header />}
-      <Routes>
+  if (loading) return <div>Loading...</div>;
+  const routes = createBrowserRouter(
+    createRoutesFromElements(
+      <>
         <Route
           path="/"
           element={data?.authUser ? <HomePage /> : <Navigate to="/login" />}
@@ -33,9 +41,18 @@ function App() {
           element={
             data?.authUser ? <TransactionPage /> : <Navigate to="/login" />
           }
+          handle={{
+            crumb: () => <Link to="/">Back to Transactions</Link>,
+          }}
         />
         <Route path="/not-found" element={<TransactionPage />} />
-      </Routes>
+      </>
+    )
+  );
+  return (
+    <div className="app">
+      {data?.authUser && <Header />}
+      <RouterProvider router={routes} />
       <Toaster />
     </div>
   );

@@ -25,7 +25,7 @@ export const LoginPage = () => {
     }
   };
   return (
-    <div>
+    <div className="login-page">
       <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <input {...register("username")} placeholder="Login" />
